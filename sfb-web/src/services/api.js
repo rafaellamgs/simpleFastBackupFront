@@ -20,12 +20,12 @@ api.interceptors.request.use(async (config) => {
 api.interceptors.response.use(
     function (response) {
         // @ts-ignore
-        if (response.message) {
+        if (response.data && response.data.message) {
             // @ts-ignore
-            toast(response.message);
-        } else if (response.mensagem) {
+            toast(response.data.message);
+        } else if (response.data && response.data.mensagem) {
             // @ts-ignore
-            toast(response.mensagem);
+            toast(response.data.mensagem);
         }
         console.log("response :", response);
         // if(response.error) {

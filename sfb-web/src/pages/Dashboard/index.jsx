@@ -133,7 +133,7 @@ export default function Dashboard(props) {
                         <div className="level">
                             <div className="level-left">
                                 <div className="level-item">
-                                    <h1 className="title">Olá {client.nome}</h1>
+                                    <h1 className="title">Olá, {client.nome}</h1>
                                 </div>
                             </div>
                             <button
@@ -142,7 +142,7 @@ export default function Dashboard(props) {
                                 onClick={handleLogout}
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} />
-                                Log out
+                                
                             </button>
                         </div>
                     </div>
