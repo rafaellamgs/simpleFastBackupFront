@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "font-awesome": "^4.7.0",
@@ -17,6 +20,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-switch": "^5.0.1",
+    "react-toastify": "^6.2.0",
     "styled-components": "^5.2.1"
   },
   "scripts": {

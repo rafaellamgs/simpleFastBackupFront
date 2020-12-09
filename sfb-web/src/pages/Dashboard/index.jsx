@@ -1,13 +1,14 @@
 import * as React from "react";
 import { Button, Form, ProgressBar } from "react-bootstrap";
 import { getUser } from "../../data/remote/getUser";
-import { getCodigo } from "../../services/auth";
+import { getCodigo, logout } from "../../services/auth";
 import "./style.css";
 import "./tema.css";
 import Logo from "../../assets/logo_SFB.png";
 import {
     ativarBackup,
     ativarNotificacoes,
+    realizarBackup,
     updateHoraBackup,
 } from "../../data/remote/actions";
 import { Formik } from "formik";
@@ -16,6 +17,8 @@ import CustomSwitch from "../../componets/Switch";
 import TimePicker from "rc-time-picker";
 import moment from "moment";
 import "rc-time-picker/assets/index.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 export default function Dashboard(props) {
     const [client, setClient] = React.useState({
         codigo: 0,
@@ -43,7 +46,10 @@ export default function Dashboard(props) {
         getUser(getCodigo())
             .then((data) => {
                 console.log("data :", data);
-                setClient(data);
+                setClient({
+                    ...data,
+                    uso_max_armaz: data.uso_max_armaz * 1024,
+                });
                 setAlerta(data.perm_alerta === 1 ? true : false);
                 setBkpAutm(data.perm_bkp_autm === 1 ? true : false);
                 setHoraBackup(data.hora_bkp_autm);
@@ -113,6 +119,12 @@ export default function Dashboard(props) {
         return `${(bytes / 1024 ** i).toFixed(1)}${seperator}${sizes[i]}`;
     }
 
+    function handleLogout() {
+        logout();
+        console.log("logout :");
+        props.history.push("/");
+    }
+
     return (
         <div id="app">
             <section className="section">
@@ -124,8 +136,17 @@ export default function Dashboard(props) {
                                     <h1 className="title">Olá {client.nome}</h1>
                                 </div>
                             </div>
+                            <button
+                                type="button"
+                                className="btn btn-default btn-sm"
+                                onClick={handleLogout}
+                            >
+                                <FontAwesomeIcon icon={faSignOutAlt} />
+                                Log out
+                            </button>
                         </div>
                     </div>
+
                     <div className="tile is-ancestor">
                         <div className="tile is-parent">
                             <div className="card tile is-child d-flex justify-content-center ">
